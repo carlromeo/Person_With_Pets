@@ -13,7 +13,7 @@ public class Pet {
     private String size;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "person_personId")
     private Person person;
 
     public long getPetId() {

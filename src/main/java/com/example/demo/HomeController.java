@@ -5,10 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -22,17 +19,17 @@ public class HomeController {
     PetRepository petRepository;
 
     @RequestMapping("/")
-    public String home (Model model){
+    public String home(Model model) {
         model.addAttribute("persons", personRepository.findAll());
         model.addAttribute("pets", petRepository.findAll());
         return "index";
     }
 
     @GetMapping("/addperson")
-    public String personForm(Model model){
+    public String personForm(Model model) {
         model.addAttribute("person", new Person());
         return "personform";
-        }
+    }
 
     @PostMapping("/processperson")
     public String personForm(@Valid Person person, BindingResult result) {
@@ -40,42 +37,44 @@ public class HomeController {
             return "personform";
         }
         personRepository.save(person);
+
         return "redirect:/personlist";
     }
 
     @RequestMapping("/personlist")
-    public String personList(Model model){
+    public String personList(Model model) {
         model.addAttribute("persons", personRepository.findAll());
-            return "personlist";
-    }
 
-    @RequestMapping("/petlist")
-    public String pettList(Model model){
-        model.addAttribute("pet", personRepository.findAll());
-        return "petlist";
+        return "personlist";
     }
-
 
     @GetMapping("/addpet")
-    public String petForm(Model model){
-        model.addAttribute("pets", petRepository.findAll());
-        model.addAttribute("student", new Pet());
+    public String petForm(Model model) {
+        model.addAttribute("persons", personRepository.findAll());
+        model.addAttribute("pet", new Pet());
         return "petform";
-        }
+    }
+
 
     @PostMapping("/processpet")
-    public String processPetForm (@Valid Pet pet, BindingResult result){
-        if (result.hasErrors()){
-            return  "petform";
+    public String processPetForm(@Valid Pet pet, BindingResult result) {
+        if (result.hasErrors()) {
+            return "petform";
         }
         petRepository.save(pet);
         return "redirect:/petlist";
     }
 
+    @RequestMapping("/petlist")
+    public String petList(Model model) {
+        model.addAttribute("pets", petRepository.findAll());
+        return "petlist";
+    }
+
 
     @RequestMapping("/detail/{id}")
-        public String showPerson(@PathVariable("id") long id, Model model) {
-        model.addAttribute("person", personRepository.findAll());
+    public String showPerson(@PathVariable("id") long id, Model model) {
+        model.addAttribute("person", personRepository.findById(id).get());
         return "showperson";
     }
 
@@ -105,12 +104,18 @@ public class HomeController {
     }
 
     @RequestMapping("/deletepet/{id}")
-    public String delPet(@PathVariable("id") long id){
+    public String delPet(@PathVariable("id") long id) {
         petRepository.deleteById(id);
         return "index";
-        }
+    }
+
+    @PostMapping("/processsearch")
+    public String searchResult(Model model, @RequestParam(name = "search") String search) {
+        model.addAttribute("pets", petRepository.findBynameContainingIgnoreCase(search));
+        return "searchlist";
 
     }
+}
 
 
 

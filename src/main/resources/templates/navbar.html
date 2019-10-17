@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="stylesheet.css">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div th:fragment="navlinks">
+
+    <nav>
+        <ul>
+            <li>
+                <a href="/">
+                    <div class="icon">
+                        <i class="fa fa-home" aria-hidden="true"></i>
+
+                    </div>
+                    <div class="name"><span data-text="Home">Home</span></div>
+                </a>
+            </li>
+
+            <li>
+                <a href="/personlist">
+                    <div class="icon">
+                        <i class="fa fa-users" aria-hidden="true"></i>
+                    </div>
+                    <div class="name"><span data-text="All Pet Owners">All Pet Owners</span></div>
+                </a>
+            </li>
+
+            <li>
+                <a href="/employeelist">
+                    <div class="icon-stack">
+                        <i class="fa fa-paw" aria-hidden="true"></i>
+                        <i class="fa fa-paw" aria-hidden="true"></i>
+                    </div>
+                    <div class="name"><span data-text="All Pets">All Pets</span></div>
+                </a>
+            </li>
+
+            <li>
+                <a href="/addperson">
+                    <div class="icon">
+                        <i class="fa fa-user-plus" aria-hidden="true"></i>
+
+                    </div>
+                    <div class="name"><span data-text="Add New Pet Owner">Add New Pet Owner</span></div>
+                </a>
+            </li>
+
+            <li>
+                <a href="/addpet">
+                    <div class="icon-stack">
+                        <i class="fa fa-paw" aria-hidden="true"></i>
+                        <i class="fa fa-plus" aria-hidden="true"></i>
+                    </div>
+                    <div class="name"><span data-text="Add New Pet">Add New Pet</span></div>
+                </a>
+            </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
+        </form>
+    </nav>
+</div>
+</body>
+</html>
